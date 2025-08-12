@@ -111,7 +111,7 @@ android.minapi = 21
 
 # (str) Android NDK version to use
 # Use NDK version that matches CI setup
-android.ndk = 23.2.8568313
+android.ndk = 25.2.9519653
 
 # (str) Java version to use for compilation
 # Set to match CI environment
@@ -128,7 +128,7 @@ android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
 # Use the NDK installed by GitHub Actions
-android.ndk_path = /usr/local/lib/android/sdk/ndk/23.2.8568313
+android.ndk_path = /usr/local/lib/android/sdk/ndk/25.2.9519653
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 # Use the SDK installed by GitHub Actions
