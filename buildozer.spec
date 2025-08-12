@@ -36,7 +36,8 @@ version = 1.0.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.1.0,kivymd==1.1.1,requests,telethon,cryptg,pillow,sqlite3,pyjnius
+# Note: sqlite3 is part of Python standard library, cryptg removed for Android compatibility
+requirements = python3,kivy==2.1.0,kivymd==1.1.1,requests,telethon,pillow,pyjnius
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -104,7 +105,7 @@ android.api = 33
 android.minapi = 21
 
 # (int) Android SDK version to use
-android.sdk = 33
+# android.sdk = 33  # DEPRECATED: This config token is deprecated and ignored
 
 # (str) Android NDK version to use
 android.ndk = 25b
@@ -127,7 +128,7 @@ android.private_storage = True
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
 # when an update is due and you just want to test/build your package
-android.skip_update = False
+android.skip_update = True
 
 # (bool) If True, then automatically accept SDK license
 # agreements. This is intended for automation only. If set to False,
@@ -192,11 +193,12 @@ android.debug_artifact = apk
 # (bool) If True, then skip trying to update the python-for-android repo
 # This can be useful to avoid excess Internet downloads or save time
 # when an update is due and you just want to test/build your package
-# p4a.skip_update = False
+p4a.skip_update = True
 
 # (bool) If True, then automatically accept the license
 # agreements. This is intended for automation only. If set to False,
 # the default, you will be shown the license when first running
+p4a.accept_sdk_license = True
 # buildozer.
 # p4a.accept_license = False
 
