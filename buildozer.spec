@@ -110,11 +110,14 @@ android.minapi = 21
 # android.sdk = 33  # DEPRECATED: This config token is deprecated and ignored
 
 # (str) Android NDK version to use
-# Use a more stable NDK version for CI/CD
-android.ndk = 23c
+# Use NDK version that matches CI setup
+android.ndk = 23.2.8568313
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 android.ndk_api = 21
+
+# (str) Android build tools version to use
+android.build_tools = 31.0.0
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 android.private_storage = True
