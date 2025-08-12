@@ -127,13 +127,16 @@ android.build_tools = 31.0.0
 android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-#android.ndk_path =
+# Use the NDK installed by GitHub Actions
+android.ndk_path = /usr/local/lib/android/sdk/ndk/23.2.8568313
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+# Use the SDK installed by GitHub Actions
+android.sdk_path = /usr/local/lib/android/sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
-#android.ant_path =
+# Use system-installed ANT to avoid download issues
+android.ant_path = /usr/share/ant
 
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
