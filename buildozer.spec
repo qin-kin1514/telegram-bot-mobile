@@ -37,7 +37,8 @@ version = 1.0.0
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # Note: sqlite3 is part of Python standard library, cryptg removed for Android compatibility
-requirements = python3,kivy==2.1.0,kivymd==1.1.1,requests,telethon,pillow,pyjnius
+# Keep versions flexible for better compatibility
+requirements = python3,kivy>=2.1.0,kivymd>=1.1.1,requests,telethon,pillow,pyjnius
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -99,7 +100,8 @@ android.permissions = INTERNET,ACCESS_NETWORK_STATE,WAKE_LOCK,WRITE_EXTERNAL_STO
 #android.features = android.hardware.usb.host
 
 # (int) Target Android API, should be as high as possible.
-android.api = 33
+# Use API 31 for better compatibility
+android.api = 31
 
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
@@ -108,7 +110,8 @@ android.minapi = 21
 # android.sdk = 33  # DEPRECATED: This config token is deprecated and ignored
 
 # (str) Android NDK version to use
-android.ndk = 25b
+# Use a more stable NDK version for CI/CD
+android.ndk = 23c
 
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 android.ndk_api = 21
