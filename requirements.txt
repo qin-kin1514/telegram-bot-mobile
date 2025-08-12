@@ -1,0 +1,29 @@
+# Telegram内容抓取机器人Android应用依赖
+
+# Kivy和KivyMD - 移动应用框架
+kivy>=2.1.0
+kivymd>=1.1.1
+
+# Telegram客户端
+telethon>=1.28.5
+
+# 异步支持
+aiohttp>=3.8.0
+aiofiles>=23.1.0
+
+# 网络请求
+requests>=2.28.0
+
+# 日期时间处理
+python-dateutil>=2.8.0
+
+# 加密
+cryptography>=3.4.8
+
+# Android特定（仅在Android平台需要）
+# pyjnius>=1.4.2  # 仅Android平台
+# plyer>=2.1.0    # 跨平台通知和权限
+
+# 开发和测试
+pytest>=7.0.0
+pytest-asyncio>=0.21.0

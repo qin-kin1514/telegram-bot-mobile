@@ -1,0 +1,35 @@
+stages:
+  - build
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+    - .buildozer
+    - .buildozer_global
+
+build_android:
+  stage: build
+  image: ubuntu:20.04
+  
+  before_script:
+    - apt update
+    - apt install -y git zip unzip openjdk-8-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+    - apt install -y build-essential libssl-dev libffi-dev python3-dev
+    - python3 -m pip install --upgrade pip
+    - pip3 install buildozer cython
+    - pip3 install -r requirements.txt
+  
+  script:
+    - buildozer android debug
+  
+  artifacts:
+    paths:
+      - bin/*.apk
+    expire_in: 1 week
+  
+  only:
+    - main
+    - merge_requests
