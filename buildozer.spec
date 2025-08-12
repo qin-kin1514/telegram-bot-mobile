@@ -36,9 +36,10 @@ version = 1.0.0
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-# Note: sqlite3 is part of Python standard library, cryptg removed for Android compatibility
-# Keep versions flexible for better compatibility
-requirements = python3,kivy>=2.1.0,kivymd>=1.1.1,requests,telethon,pillow
+# Note: sqlite3 is part of Python standard library
+# cryptg and pillow removed for Android compatibility
+# Using fixed versions for better stability
+requirements = python3,kivy==2.1.0,kivymd==1.1.1,requests,telethon,android
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
