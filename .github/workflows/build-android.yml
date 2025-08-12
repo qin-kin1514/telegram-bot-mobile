@@ -56,33 +56,57 @@ jobs:
         echo "ANDROID_NDK_HOME=$ANDROID_HOME/ndk/23.2.8568313" >> $GITHUB_ENV
         echo "ANDROID_NDK_ROOT=$ANDROID_HOME/ndk/23.2.8568313" >> $GITHUB_ENV
         echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
-        echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
+        # Check which cmdline-tools directory exists and add to PATH
+        if [ -d "$ANDROID_HOME/cmdline-tools/latest/bin" ]; then
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
+        elif [ -d "$ANDROID_HOME/cmdline-tools/latest-2/bin" ]; then
+          echo "$ANDROID_HOME/cmdline-tools/latest-2/bin" >> $GITHUB_PATH
+        fi
         echo "$ANDROID_HOME/ndk/23.2.8568313" >> $GITHUB_PATH
     
     - name: Create sdkmanager symlink for buildozer compatibility
       run: |
         # Create tools/bin directory structure for backward compatibility
         sudo mkdir -p $ANDROID_HOME/tools/bin
-        # Create symlink from old path to new path
-        sudo ln -sf $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
+        # Find the actual cmdline-tools directory and create symlink
+        if [ -f "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+          sudo ln -sf $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
+          echo "Created symlink from latest directory"
+        elif [ -f "$ANDROID_HOME/cmdline-tools/latest-2/bin/sdkmanager" ]; then
+          sudo ln -sf $ANDROID_HOME/cmdline-tools/latest-2/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
+          echo "Created symlink from latest-2 directory"
+        else
+          echo "Error: sdkmanager not found in expected locations"
+          exit 1
+        fi
         # Verify the symlink works
         ls -la $ANDROID_HOME/tools/bin/sdkmanager
         $ANDROID_HOME/tools/bin/sdkmanager --version
     
     - name: Verify Android SDK and NDK installation
       run: |
-        echo "Android SDK path: $ANDROID_HOME"
-        echo "Android NDK path: $ANDROID_HOME/ndk/23.2.8568313"
+        echo "Android SDK location: $ANDROID_HOME"
+        echo "Android NDK location: $ANDROID_NDK_HOME"
         ls -la $ANDROID_HOME/
-        ls -la $ANDROID_HOME/ndk/ || echo "NDK directory not found"
-        ls -la $ANDROID_HOME/cmdline-tools/ || echo "cmdline-tools directory not found"
-        ls -la $ANDROID_HOME/tools/bin/ || echo "tools/bin directory not found"
-        which ant || echo "ANT not found in PATH"
-        which sdkmanager || echo "sdkmanager not found in PATH"
-        echo "Testing sdkmanager from old path (buildozer compatibility):"
-        $ANDROID_HOME/tools/bin/sdkmanager --version || echo "Old path sdkmanager not working"
-        echo "Testing sdkmanager from new path:"
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --version || echo "New path sdkmanager not working"
+        echo "Checking platform-tools:"
+        ls -la $ANDROID_HOME/platform-tools/
+        echo "Checking cmdline-tools:"
+        ls -la $ANDROID_HOME/cmdline-tools/
+        echo "Checking tools/bin directory:"
+        ls -la $ANDROID_HOME/tools/bin/
+        echo "Testing old sdkmanager path (via symlink):"
+        $ANDROID_HOME/tools/bin/sdkmanager --version || echo "Old path failed"
+        echo "Testing actual sdkmanager paths:"
+        if [ -f "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+          echo "Testing latest path:"
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --version || echo "Latest path failed"
+        fi
+        if [ -f "$ANDROID_HOME/cmdline-tools/latest-2/bin/sdkmanager" ]; then
+          echo "Testing latest-2 path:"
+          $ANDROID_HOME/cmdline-tools/latest-2/bin/sdkmanager --version || echo "Latest-2 path failed"
+        fi
+        echo "Checking NDK:"
+        ls -la $ANDROID_HOME/ndk/
     
     - name: Cache Buildozer global directory
       uses: actions/cache@v4
