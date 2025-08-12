@@ -1,4 +1,26 @@
+4秒
 Run # Set environment variables for better build stability
+  # Set environment variables for better build stability
+  export GRADLE_OPTS="-Xmx2048m -Dorg.gradle.jvmargs=-Xmx2048m"
+  export JAVA_OPTS="-Xmx2048m"
+  # Build APK
+  buildozer android debug
+  shell: /usr/bin/bash -e {0}
+  env:
+    pythonLocation: /opt/hostedtoolcache/Python/3.9.23/x64
+    PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.9.23/x64/lib/pkgconfig
+    Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.9.23/x64
+    Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.9.23/x64
+    Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.9.23/x64
+    LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.9.23/x64/lib
+    JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+    JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.16-8/x64
+    ANDROID_HOME: /usr/local/lib/android/sdk
+    ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+    ANDROID_NDK_HOME: /usr/local/lib/android/sdk/ndk/23.2.8568313
+    ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/23.2.8568313
+    GRADLE_OPTS: -Xmx2048m -Dorg.gradle.jvmargs=-Xmx2048m
+    JAVA_OPTS: -Xmx2048m
 Cloning into 'python-for-android'...
 # Check configuration tokens
 # Ensure build layout
