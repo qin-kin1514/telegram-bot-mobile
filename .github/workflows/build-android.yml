@@ -36,27 +36,26 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install buildozer cython
-        pip install -r telegram_bot_mobile/requirements.txt
+        pip install -r requirements.txt
     
     - name: Cache Buildozer global directory
       uses: actions/cache@v4
       with:
-        path: telegram_bot_mobile/.buildozer_global
-        key: buildozer-global-${{ hashFiles('telegram_bot_mobile/buildozer.spec') }}
+        path: .buildozer_global
+        key: buildozer-global-${{ hashFiles('buildozer.spec') }}
     
     - name: Cache Buildozer directory
       uses: actions/cache@v4
       with:
-        path: telegram_bot_mobile/.buildozer
-        key: buildozer-${{ hashFiles('telegram_bot_mobile/buildozer.spec') }}
+        path: .buildozer
+        key: buildozer-${{ hashFiles('buildozer.spec') }}
     
     - name: Build APK
       run: |
-        cd telegram_bot_mobile
         buildozer android debug
     
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: android-apk
-        path: telegram_bot_mobile/bin/*.apk
+        path: bin/*.apk
