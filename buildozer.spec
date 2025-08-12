@@ -113,6 +113,10 @@ android.minapi = 21
 # Use NDK version that matches CI setup
 android.ndk = 23.2.8568313
 
+# (str) Java version to use for compilation
+# Set to match CI environment
+android.gradle_dependencies = com.android.tools.build:gradle:7.4.2
+
 # (int) Android NDK API to use. This is the minimum API your app will support, it should usually match android.minapi.
 android.ndk_api = 21
 
@@ -141,6 +145,9 @@ android.skip_update = True
 # the default, you will be shown the license when first running
 # buildozer.
 android.accept_sdk_license = True
+
+# (str) Gradle version to use
+android.gradle_version = 7.6
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
 # In past, was `android.arch` as we weren't supporting builds for multiple archs at the same time.
