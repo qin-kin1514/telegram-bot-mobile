@@ -37,9 +37,12 @@ version = 1.0.0
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
 # Note: sqlite3 is part of Python standard library
-# cryptg and pillow removed for Android compatibility
-# Using fixed versions for better stability
-requirements = python3,kivy==2.1.0,kivymd==1.1.1,requests,telethon,android
+# TROUBLESHOOTING: Using minimal dependencies for initial build testing
+# - telethon: Temporarily removed due to potential Android compatibility issues
+# - android: Temporarily removed as it may not be necessary for basic functionality
+# - Fixed versions removed to let python-for-android choose compatible versions
+# The app has proper error handling for missing telethon dependency
+requirements = python3,kivy,kivymd,requests
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -55,7 +58,8 @@ requirements = python3,kivy==2.1.0,kivymd==1.1.1,requests,telethon,android
 orientation = portrait
 
 # (list) List of service to declare
-services = TelegramBotService:android/service.py:foreground
+# Temporarily commented out for troubleshooting
+# services = TelegramBotService:android/service.py:foreground
 
 #
 # OSX Specific
@@ -95,7 +99,8 @@ android.presplash_color = #FFFFFF
 #android.adaptive_icon.foreground = "path/to/adaptive-icon/foreground.png"
 
 # (list) Permissions
-android.permissions = INTERNET,ACCESS_NETWORK_STATE,WAKE_LOCK,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,RECEIVE_BOOT_COMPLETED,REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,FOREGROUND_SERVICE,SYSTEM_ALERT_WINDOW
+# Simplified permissions for initial build testing
+android.permissions = INTERNET,ACCESS_NETWORK_STATE,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
 
 # (list) features (adds uses-feature -tags to manifest)
 #android.features = android.hardware.usb.host
@@ -128,16 +133,16 @@ android.build_tools = 31.0.0
 android.private_storage = True
 
 # (str) Android NDK directory (if empty, it will be automatically downloaded.)
-# Use the NDK installed by GitHub Actions
-android.ndk_path = /usr/local/lib/android/sdk/ndk/25.2.9519653
+# Let buildozer auto-detect for better compatibility
+# android.ndk_path = /usr/local/lib/android/sdk/ndk/25.2.9519653
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-# Use the SDK installed by GitHub Actions
-android.sdk_path = /usr/local/lib/android/sdk
+# Let buildozer auto-detect for better compatibility
+# android.sdk_path = /usr/local/lib/android/sdk
 
 # (str) ANT directory (if empty, it will be automatically downloaded.)
-# Use system-installed ANT to avoid download issues
-android.ant_path = /usr/share/ant
+# Let buildozer auto-detect for better compatibility
+# android.ant_path = /usr/share/ant
 
 # (bool) If True, then skip trying to update the Android sdk
 # This can be useful to avoid excess Internet downloads or save time
