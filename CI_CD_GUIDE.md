@@ -16,7 +16,7 @@
    cd telegram_bot_mobile
    git init
    git add .
-   git commit -m "Initial commit"
+   git commit -m "Initial commit with CI/CD setup"
    git branch -M main
    git remote add origin https://github.com/qin-kin1514/telegram-bot-mobile.git
    git push -u origin main
