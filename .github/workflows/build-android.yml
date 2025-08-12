@@ -40,7 +40,7 @@ jobs:
       with:
         cmdline-tools-version: 11076708
         accept-android-sdk-licenses: true
-        packages: "platform-tools platforms;android-31 build-tools;31.0.0 ndk;23.2.8568313 cmake;3.18.1"
+        packages: "cmdline-tools;latest platform-tools platforms;android-31 build-tools;31.0.0 ndk;23.2.8568313 cmake;3.18.1"
     
     - name: Install Python dependencies
       run: |
@@ -65,7 +65,10 @@ jobs:
         echo "Android NDK path: $ANDROID_HOME/ndk/23.2.8568313"
         ls -la $ANDROID_HOME/
         ls -la $ANDROID_HOME/ndk/ || echo "NDK directory not found"
+        ls -la $ANDROID_HOME/cmdline-tools/ || echo "cmdline-tools directory not found"
         which ant || echo "ANT not found in PATH"
+        which sdkmanager || echo "sdkmanager not found in PATH"
+        sdkmanager --version || echo "sdkmanager not working"
     
     - name: Cache Buildozer global directory
       uses: actions/cache@v4
