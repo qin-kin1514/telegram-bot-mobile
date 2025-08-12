@@ -52,9 +52,6 @@ jobs:
     
     - name: Build APK
       run: |
-        pwd
-        ls -la
-        ls -la buildozer.spec || echo "buildozer.spec not found"
         buildozer android debug
     
     - name: Upload APK
